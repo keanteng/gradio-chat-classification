@@ -1,0 +1,5 @@
+pandas
+google
+joblib
+python-dotenv
+scikit-learn

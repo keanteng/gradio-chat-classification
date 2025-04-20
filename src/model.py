@@ -96,7 +96,7 @@ def set_borrower_details(
         "previous_loan_defaults_on_file": previous_loan_defaults_on_file
     }
     input_df = pd.DataFrame([input_data])
-    print("This is the input data")
+    print("### This is the input data:")
     print(input_df.head())
     # scale the input data
     means_stds = pd.read_csv("data/means_stds.csv")
@@ -117,7 +117,7 @@ def set_borrower_details(
     for column in categorical_columns:
         input_df[column] = input_df[column].apply(lambda x: get_encoding(column, x))
     
-    print("This is the processed input data")
+    print("### This is the processed input data: ")
     print(input_df.head())
 
     # load classifier at model/logistic_regression.pkl
@@ -271,6 +271,7 @@ def classify_loan(
         "previous_loan_defaults_on_file": previous_loan_defaults_on_file
     }
     print(input_data)
+    print("### This is the input prompt:")
     print(f"This is the personal details ```{input_data}```")
 
     # Define user prompt
@@ -286,7 +287,7 @@ def classify_loan(
 
     # Send request with function declarations
     response = client.models.generate_content(
-        model="gemini-2.0-flash", config=config, contents=contents
+        model="gemini-2.5-flash-preview-04-17", config=config, contents=contents
     )
     print(response.candidates[0].content.parts[0].function_call)
     print(response.text)
